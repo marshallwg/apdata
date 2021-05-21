@@ -1,0 +1,2190 @@
+------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Volumes/shared//data//goofin//ap_data//logs/1_exploring_ap_data_5_Apr_2021.txt
+  log type:  text
+ opened on:   5 Apr 2021, 17:01:02
+r; t=2.74 17:01:02
+
+. graph set window fontface default
+r; t=0.47 17:01:03
+
+. 
+. *Load file
+. use "${final}ap_test_data_2002_2020.dta", clear
+r; t=0.21 17:01:03
+
+. drop if year==2020
+(1 observation deleted)
+r; t=0.00 17:01:03
+
+. local graph
+r; t=0.00 17:01:03
+
+. 
+. // create the graph
+. cap drop zero
+r; t=0.00 17:01:03
+
+. cap drop l?
+r; t=0.00 17:01:03
+
+. gen zero = 0
+r; t=0.00 17:01:03
+
+. gen l1 = (p_T_0)
+r; t=0.00 17:01:03
+
+. gen l2 = (p_T_0 + p_T_1)
+r; t=0.00 17:01:03
+
+. gen l3 = (p_T_0 + p_T_1+p_T_2)
+r; t=0.00 17:01:03
+
+. gen l4 = (p_T_0 + p_T_1+p_T_2+p_T_3)
+r; t=0.00 17:01:03
+
+. gen l5 = (p_T_0 + p_T_1+p_T_2+p_T_3+p_T_4)
+r; t=0.00 17:01:03
+
+. gen l6 = (p_T_0 + p_T_1+p_T_2+p_T_3+p_T_4+p_T_5)
+r; t=0.00 17:01:03
+
+. 
+. sort year
+r; t=0.00 17:01:03
+
+. quietly sum year
+r; t=0.00 17:01:03
+
+. global min=`r(min)'
+r; t=0.00 17:01:03
+
+. global max=`r(max)'
+r; t=0.00 17:01:03
+
+. // collect the labels for the second y-axis
+. quietly sum p_T_0 if year==${min}
+r; t=0.00 17:01:03
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:01:03
+
+. quietly sum p_T_0 if year==${max}
+r; t=0.00 17:01:03
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:01:03
+
+. local mid = l1[_N]/2
+r; t=0.00 17:01:03
+
+. local yaxis `"`mid' "Am. Ind.:`l11'%-`l12'%""'
+r; t=0.00 17:01:03
+
+. 
+. quietly sum p_T_1 if year==${min}
+r; t=0.00 17:01:03
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:01:03
+
+. quietly sum p_T_1 if year==${max}
+r; t=0.00 17:01:03
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:01:03
+
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+r; t=0.00 17:01:03
+
+. local yaxis `"`yaxis' `mid' "Asian:`l11'%-`l12'%""'
+r; t=0.00 17:01:03
+
+. 
+. quietly sum p_T_2 if year==${min}
+r; t=0.00 17:01:03
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:01:03
+
+. quietly sum p_T_2 if year==${max}
+r; t=0.00 17:01:03
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:01:03
+
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+r; t=0.00 17:01:03
+
+. local yaxis `"`yaxis' `mid' "Hispanic:`l11'%-`l12'%""'
+r; t=0.00 17:01:03
+
+. 
+. quietly sum p_T_3 if year==${min}
+r; t=0.00 17:01:03
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:01:03
+
+. quietly sum p_T_3 if year==${max}
+r; t=0.00 17:01:03
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:01:03
+
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+r; t=0.00 17:01:03
+
+. local yaxis `"`yaxis' `mid' "Black:`l11'%-`l12'%""'
+r; t=0.00 17:01:03
+
+. 
+. quietly sum p_T_4 if year==${min}
+r; t=0.00 17:01:03
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:01:03
+
+. quietly sum p_T_4 if year==${max}
+r; t=0.00 17:01:03
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:01:03
+
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+r; t=0.00 17:01:03
+
+. local yaxis `"`yaxis' `mid' "White:`l11'%-`l12'%""'
+r; t=0.00 17:01:03
+
+. 
+. quietly sum p_T_5 if year==${min}
+r; t=0.00 17:01:03
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:01:03
+
+. quietly sum p_T_5 if year==${max}
+r; t=0.00 17:01:03
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:01:03
+
+. local mid = (100-l5[_N])/2 + l5[_N]
+r; t=0.00 17:01:03
+
+. local yaxis `"`yaxis' `mid' "Other:`l11'%-`l12'%""'
+r; t=0.00 17:01:03
+
+. 
+. local lcolors="lwidth(none)"
+r; t=0.00 17:01:03
+
+. colorpalette viridis, nograph
+r; t=151.35 17:03:34
+
+. set scheme plotplainblind_mwg
+r; t=0.18 17:03:35
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP examination-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+r; t=16.95 17:03:52
+
+. graphsout "${results}fig_1", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.svg written in SVG format)
+r; t=1.73 17:03:53
+
+. s
+command s is unrecognized
+r(199); t=0.07 17:03:53
+
+end of do-file
+
+r(199); t=174.00 17:03:53
+
+. set scheme uncluttered
+r; t=0.18 17:04:23
+
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. sort year
+r; t=0.00 17:04:36
+
+. quietly sum year
+r; t=0.00 17:04:36
+
+. global min=`r(min)'
+r; t=0.00 17:04:36
+
+. global max=`r(max)'
+r; t=0.00 17:04:36
+
+. // collect the labels for the second y-axis
+. quietly sum p_T_0 if year==${min}
+r; t=0.00 17:04:36
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:04:36
+
+. quietly sum p_T_0 if year==${max}
+r; t=0.00 17:04:36
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:04:36
+
+. local mid = l1[_N]/2
+r; t=0.00 17:04:36
+
+. local yaxis `"`mid' "Am. Ind.:`l11'%-`l12'%""'
+r; t=0.00 17:04:36
+
+. 
+. quietly sum p_T_1 if year==${min}
+r; t=0.00 17:04:36
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:04:36
+
+. quietly sum p_T_1 if year==${max}
+r; t=0.00 17:04:36
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:04:36
+
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+r; t=0.00 17:04:36
+
+. local yaxis `"`yaxis' `mid' "Asian:`l11'%-`l12'%""'
+r; t=0.00 17:04:36
+
+. 
+. quietly sum p_T_2 if year==${min}
+r; t=0.00 17:04:36
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:04:36
+
+. quietly sum p_T_2 if year==${max}
+r; t=0.00 17:04:36
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:04:36
+
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+r; t=0.00 17:04:36
+
+. local yaxis `"`yaxis' `mid' "Hispanic:`l11'%-`l12'%""'
+r; t=0.00 17:04:36
+
+. 
+. quietly sum p_T_3 if year==${min}
+r; t=0.00 17:04:36
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:04:36
+
+. quietly sum p_T_3 if year==${max}
+r; t=0.00 17:04:36
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:04:36
+
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+r; t=0.00 17:04:36
+
+. local yaxis `"`yaxis' `mid' "Black:`l11'%-`l12'%""'
+r; t=0.00 17:04:36
+
+. 
+. quietly sum p_T_4 if year==${min}
+r; t=0.00 17:04:36
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:04:36
+
+. quietly sum p_T_4 if year==${max}
+r; t=0.00 17:04:36
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:04:36
+
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+r; t=0.00 17:04:36
+
+. local yaxis `"`yaxis' `mid' "White:`l11'%-`l12'%""'
+r; t=0.00 17:04:36
+
+. 
+. quietly sum p_T_5 if year==${min}
+r; t=0.00 17:04:36
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:04:36
+
+. quietly sum p_T_5 if year==${max}
+r; t=0.00 17:04:36
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:04:36
+
+. local mid = (100-l5[_N])/2 + l5[_N]
+r; t=0.00 17:04:36
+
+. local yaxis `"`yaxis' `mid' "Other:`l11'%-`l12'%""'
+r; t=0.00 17:04:36
+
+. 
+. local lcolors="lwidth(none)"
+r; t=0.00 17:04:36
+
+. colorpalette viridis, nograph
+r; t=0.00 17:04:36
+
+. set scheme plotplainblind_mwg
+r; t=0.07 17:04:36
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP exams earning a ")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+r; t=0.99 17:04:37
+
+. graphsout "${results}fig_1", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.svg written in SVG format)
+r; t=1.00 17:04:38
+
+. 
+end of do-file
+
+r; t=2.05 17:04:38
+. scheme
+scheme is a class
+r(4002); t=0.03 17:04:44
+
+. scheme query
+scheme is a class
+r(4002); t=0.01 17:04:52
+
+. help scheme
+r; t=0.31 17:04:55
+
+. set scheme
+invalid syntax
+r(198); t=0.01 17:05:01
+
+. set scheme uncluttered
+r; t=0.21 17:05:07
+
+. set scheme usc
+r; t=0.22 17:05:09
+
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. sort year
+r; t=0.00 17:05:19
+
+. quietly sum year
+r; t=0.00 17:05:19
+
+. global min=`r(min)'
+r; t=0.00 17:05:19
+
+. global max=`r(max)'
+r; t=0.00 17:05:19
+
+. // collect the labels for the second y-axis
+. quietly sum p_T_0 if year==${min}
+r; t=0.00 17:05:19
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:19
+
+. quietly sum p_T_0 if year==${max}
+r; t=0.00 17:05:19
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:19
+
+. local mid = l1[_N]/2
+r; t=0.00 17:05:19
+
+. local yaxis `"`mid' "Am. Ind.:`l11'%-`l12'%""'
+r; t=0.00 17:05:19
+
+. 
+. quietly sum p_T_1 if year==${min}
+r; t=0.00 17:05:19
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:19
+
+. quietly sum p_T_1 if year==${max}
+r; t=0.00 17:05:19
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:19
+
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+r; t=0.00 17:05:19
+
+. local yaxis `"`yaxis' `mid' "Asian:`l11'%-`l12'%""'
+r; t=0.00 17:05:19
+
+. 
+. quietly sum p_T_2 if year==${min}
+r; t=0.00 17:05:19
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:19
+
+. quietly sum p_T_2 if year==${max}
+r; t=0.00 17:05:19
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:19
+
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+r; t=0.00 17:05:19
+
+. local yaxis `"`yaxis' `mid' "Hispanic:`l11'%-`l12'%""'
+r; t=0.00 17:05:19
+
+. 
+. quietly sum p_T_3 if year==${min}
+r; t=0.00 17:05:19
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:19
+
+. quietly sum p_T_3 if year==${max}
+r; t=0.00 17:05:19
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:19
+
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+r; t=0.00 17:05:19
+
+. local yaxis `"`yaxis' `mid' "Black:`l11'%-`l12'%""'
+r; t=0.00 17:05:19
+
+. 
+. quietly sum p_T_4 if year==${min}
+r; t=0.00 17:05:19
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:19
+
+. quietly sum p_T_4 if year==${max}
+r; t=0.00 17:05:19
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:19
+
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+r; t=0.00 17:05:19
+
+. local yaxis `"`yaxis' `mid' "White:`l11'%-`l12'%""'
+r; t=0.00 17:05:19
+
+. 
+. quietly sum p_T_5 if year==${min}
+r; t=0.00 17:05:19
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:19
+
+. quietly sum p_T_5 if year==${max}
+r; t=0.00 17:05:19
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:19
+
+. local mid = (100-l5[_N])/2 + l5[_N]
+r; t=0.00 17:05:19
+
+. local yaxis `"`yaxis' `mid' "Other:`l11'%-`l12'%""'
+r; t=0.00 17:05:19
+
+. 
+. local lcolors="lwidth(none)"
+r; t=0.00 17:05:19
+
+. colorpalette viridis, nograph
+r; t=0.00 17:05:19
+
+. set scheme plotplainblind_mwg
+r; t=0.14 17:05:19
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP exams earning a ")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+r; t=1.36 17:05:21
+
+. graphsout "${results}fig_1", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.svg written in SVG format)
+r; t=0.87 17:05:22
+
+. 
+end of do-file
+
+r; t=2.38 17:05:22
+. set scheme default
+scheme default not found
+r(111); t=0.27 17:05:28
+
+. set scheme lean1
+scheme lean1 not found
+r(111); t=0.25 17:05:32
+
+. set scheme lean
+scheme lean not found
+r(111); t=0.19 17:05:36
+
+. set scheme tufte
+r; t=0.11 17:05:39
+
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. sort year
+r; t=0.02 17:05:41
+
+. quietly sum year
+r; t=0.00 17:05:41
+
+. global min=`r(min)'
+r; t=0.00 17:05:41
+
+. global max=`r(max)'
+r; t=0.00 17:05:41
+
+. // collect the labels for the second y-axis
+. quietly sum p_T_0 if year==${min}
+r; t=0.00 17:05:41
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:41
+
+. quietly sum p_T_0 if year==${max}
+r; t=0.00 17:05:41
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:41
+
+. local mid = l1[_N]/2
+r; t=0.00 17:05:41
+
+. local yaxis `"`mid' "Am. Ind.:`l11'%-`l12'%""'
+r; t=0.00 17:05:41
+
+. 
+. quietly sum p_T_1 if year==${min}
+r; t=0.00 17:05:41
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:41
+
+. quietly sum p_T_1 if year==${max}
+r; t=0.00 17:05:41
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:41
+
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+r; t=0.00 17:05:41
+
+. local yaxis `"`yaxis' `mid' "Asian:`l11'%-`l12'%""'
+r; t=0.00 17:05:41
+
+. 
+. quietly sum p_T_2 if year==${min}
+r; t=0.00 17:05:41
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:41
+
+. quietly sum p_T_2 if year==${max}
+r; t=0.00 17:05:41
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:41
+
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+r; t=0.00 17:05:41
+
+. local yaxis `"`yaxis' `mid' "Hispanic:`l11'%-`l12'%""'
+r; t=0.00 17:05:41
+
+. 
+. quietly sum p_T_3 if year==${min}
+r; t=0.00 17:05:41
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:41
+
+. quietly sum p_T_3 if year==${max}
+r; t=0.00 17:05:41
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:41
+
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+r; t=0.00 17:05:41
+
+. local yaxis `"`yaxis' `mid' "Black:`l11'%-`l12'%""'
+r; t=0.00 17:05:41
+
+. 
+. quietly sum p_T_4 if year==${min}
+r; t=0.00 17:05:41
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:41
+
+. quietly sum p_T_4 if year==${max}
+r; t=0.00 17:05:41
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:41
+
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+r; t=0.00 17:05:41
+
+. local yaxis `"`yaxis' `mid' "White:`l11'%-`l12'%""'
+r; t=0.00 17:05:41
+
+. 
+. quietly sum p_T_5 if year==${min}
+r; t=0.00 17:05:41
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:41
+
+. quietly sum p_T_5 if year==${max}
+r; t=0.00 17:05:41
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:41
+
+. local mid = (100-l5[_N])/2 + l5[_N]
+r; t=0.00 17:05:41
+
+. local yaxis `"`yaxis' `mid' "Other:`l11'%-`l12'%""'
+r; t=0.00 17:05:41
+
+. 
+. local lcolors="lwidth(none)"
+r; t=0.00 17:05:41
+
+. colorpalette viridis, nograph
+r; t=0.01 17:05:41
+
+. set scheme plotplainblind_mwg
+r; t=0.07 17:05:41
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP exams earning a ")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+r; t=1.39 17:05:43
+
+. graphsout "${results}fig_1", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.svg written in SVG format)
+r; t=0.81 17:05:44
+
+. 
+end of do-file
+
+r; t=2.35 17:05:44
+. set scheme uncluttered
+r; t=0.16 17:05:51
+
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. sort year
+r; t=0.01 17:05:57
+
+. quietly sum year
+r; t=0.00 17:05:57
+
+. global min=`r(min)'
+r; t=0.00 17:05:57
+
+. global max=`r(max)'
+r; t=0.00 17:05:57
+
+. // collect the labels for the second y-axis
+. quietly sum p_T_0 if year==${min}
+r; t=0.00 17:05:57
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:57
+
+. quietly sum p_T_0 if year==${max}
+r; t=0.00 17:05:57
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:57
+
+. local mid = l1[_N]/2
+r; t=0.00 17:05:57
+
+. local yaxis `"`mid' "Am. Ind.:`l11'%-`l12'%""'
+r; t=0.00 17:05:57
+
+. 
+. quietly sum p_T_1 if year==${min}
+r; t=0.00 17:05:57
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:57
+
+. quietly sum p_T_1 if year==${max}
+r; t=0.00 17:05:57
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:57
+
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+r; t=0.00 17:05:57
+
+. local yaxis `"`yaxis' `mid' "Asian:`l11'%-`l12'%""'
+r; t=0.00 17:05:57
+
+. 
+. quietly sum p_T_2 if year==${min}
+r; t=0.00 17:05:57
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:57
+
+. quietly sum p_T_2 if year==${max}
+r; t=0.00 17:05:57
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:57
+
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+r; t=0.00 17:05:57
+
+. local yaxis `"`yaxis' `mid' "Hispanic:`l11'%-`l12'%""'
+r; t=0.00 17:05:57
+
+. 
+. quietly sum p_T_3 if year==${min}
+r; t=0.00 17:05:57
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:57
+
+. quietly sum p_T_3 if year==${max}
+r; t=0.00 17:05:57
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:57
+
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+r; t=0.00 17:05:57
+
+. local yaxis `"`yaxis' `mid' "Black:`l11'%-`l12'%""'
+r; t=0.00 17:05:57
+
+. 
+. quietly sum p_T_4 if year==${min}
+r; t=0.00 17:05:57
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:57
+
+. quietly sum p_T_4 if year==${max}
+r; t=0.00 17:05:57
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:57
+
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+r; t=0.00 17:05:57
+
+. local yaxis `"`yaxis' `mid' "White:`l11'%-`l12'%""'
+r; t=0.00 17:05:57
+
+. 
+. quietly sum p_T_5 if year==${min}
+r; t=0.00 17:05:57
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:05:57
+
+. quietly sum p_T_5 if year==${max}
+r; t=0.00 17:05:57
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:05:57
+
+. local mid = (100-l5[_N])/2 + l5[_N]
+r; t=0.00 17:05:57
+
+. local yaxis `"`yaxis' `mid' "Other:`l11'%-`l12'%""'
+r; t=0.00 17:05:57
+
+. 
+. local lcolors="lwidth(none)"
+r; t=0.00 17:05:57
+
+. colorpalette viridis, nograph
+r; t=0.00 17:05:57
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP exams earning a ")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+r; t=4.61 17:06:01
+
+. graphsout "${results}fig_1", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.svg written in SVG format)
+r; t=0.88 17:06:02
+
+. 
+end of do-file
+
+r; t=5.52 17:06:02
+. set scheme plotplainblind
+r; t=0.52 17:07:07
+
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. sort year
+r; t=0.00 17:07:17
+
+. quietly sum year
+r; t=0.00 17:07:17
+
+. global min=`r(min)'
+r; t=0.00 17:07:17
+
+. global max=`r(max)'
+r; t=0.00 17:07:17
+
+. // collect the labels for the second y-axis
+. quietly sum p_T_0 if year==${min}
+r; t=0.00 17:07:17
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:07:17
+
+. quietly sum p_T_0 if year==${max}
+r; t=0.00 17:07:17
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:07:17
+
+. local mid = l1[_N]/2
+r; t=0.00 17:07:17
+
+. local yaxis `"`mid' "Am. Ind.:`l11'%-`l12'%""'
+r; t=0.00 17:07:17
+
+. 
+. quietly sum p_T_1 if year==${min}
+r; t=0.00 17:07:17
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:07:17
+
+. quietly sum p_T_1 if year==${max}
+r; t=0.00 17:07:17
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:07:17
+
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+r; t=0.00 17:07:17
+
+. local yaxis `"`yaxis' `mid' "Asian:`l11'%-`l12'%""'
+r; t=0.00 17:07:17
+
+. 
+. quietly sum p_T_2 if year==${min}
+r; t=0.00 17:07:17
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:07:17
+
+. quietly sum p_T_2 if year==${max}
+r; t=0.00 17:07:17
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:07:17
+
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+r; t=0.00 17:07:17
+
+. local yaxis `"`yaxis' `mid' "Hispanic:`l11'%-`l12'%""'
+r; t=0.00 17:07:17
+
+. 
+. quietly sum p_T_3 if year==${min}
+r; t=0.00 17:07:17
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:07:17
+
+. quietly sum p_T_3 if year==${max}
+r; t=0.00 17:07:17
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:07:17
+
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+r; t=0.00 17:07:17
+
+. local yaxis `"`yaxis' `mid' "Black:`l11'%-`l12'%""'
+r; t=0.00 17:07:17
+
+. 
+. quietly sum p_T_4 if year==${min}
+r; t=0.00 17:07:17
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:07:17
+
+. quietly sum p_T_4 if year==${max}
+r; t=0.00 17:07:17
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:07:17
+
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+r; t=0.00 17:07:17
+
+. local yaxis `"`yaxis' `mid' "White:`l11'%-`l12'%""'
+r; t=0.00 17:07:17
+
+. 
+. quietly sum p_T_5 if year==${min}
+r; t=0.00 17:07:17
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:07:17
+
+. quietly sum p_T_5 if year==${max}
+r; t=0.00 17:07:17
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:07:17
+
+. local mid = (100-l5[_N])/2 + l5[_N]
+r; t=0.00 17:07:17
+
+. local yaxis `"`yaxis' `mid' "Other:`l11'%-`l12'%""'
+r; t=0.00 17:07:17
+
+. 
+. local lcolors="lwidth(none)"
+r; t=0.00 17:07:17
+
+. colorpalette viridis, nograph
+r; t=0.00 17:07:17
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP exam-takers ")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+r; t=2.78 17:07:20
+
+. graphsout "${results}fig_1", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.svg written in SVG format)
+r; t=1.02 17:07:21
+
+. 
+end of do-file
+
+r; t=3.80 17:07:21
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. 
+. local cnt=1
+r; t=0.03 17:11:33
+
+. local graph
+r; t=0.00 17:11:33
+
+. local assort="plotregion(margin(zero)) legend(off) aspect(1)"
+r; t=0.00 17:11:33
+
+. local yscale1=`"yscale(range(0 100)) ytitle("Percentage of AP exams with a qualifying score")"'
+r; t=0.00 17:11:33
+
+. local yscale2=`"yscale(range(0 100) axis(2)) ytitle("", axis(2))"'
+r; t=0.00 17:11:33
+
+. local xlabel="xlabel(2002(2)2020)"
+r; t=0.00 17:11:33
+
+. local ylabel="ylabel(0(25)100)"
+r; t=0.00 17:11:33
+
+. local ltype="lpattern(solid)"
+r; t=0.00 17:11:33
+
+. local yaxis
+r; t=0.00 17:11:33
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+r; t=5.47 17:11:39
+
+. local colors=`"`r(p)'"'
+r; t=0.00 17:11:39
+
+. preserve
+r; t=0.00 17:11:39
+
+.         labvarch p_qual_score_?, after(":")
+r; t=2.56 17:11:41
+
+.         forvalues i=0/5 {
+  2.                 local axis
+  3.                 if `i'==0 local axis="yaxis(1)"
+  4.                 if `i'==1 local axis="yaxis(2)"
+  5.                 quietly sum p_qual_score_`i' if year==${max}
+  6.                 local yaxis=`"`yaxis' `r(max)' "`:variable label p_qual_score_`i''""'
+  7.                 local graph=`"`graph' (line p_qual_score_`i' year, lcolor("`:word `cnt' of `colors''") `ltype' `axi
+> s')"'
+  8.                 local ++cnt
+  9.         }
+r; t=0.57 17:11:42
+
+. 
+.         twoway `graph', `yscale1' `yscale2' `assort' `xlabel' `ylabel' ///
+>                 ylab(`yaxis', axis(2))
+r; t=1.45 17:11:43
+
+. restore
+r; t=0.00 17:11:43
+
+. graphsout "${results}fig_2", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_2.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_2.svg written in SVG format)
+r; t=1.21 17:11:44
+
+. 
+end of do-file
+
+r; t=11.41 17:11:44
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. local cnt=1
+r; t=0.03 17:13:54
+
+. local graph
+r; t=0.00 17:13:54
+
+. local assort="plotregion(margin(zero)) legend(off) aspect(1)"
+r; t=0.00 17:13:54
+
+. local yscale1=`"yscale(range(0 100)) ytitle("Percentage of AP exams with a qualifying score")"'
+r; t=0.00 17:13:54
+
+. local yscale2=`"yscale(range(0 100) lystyle(none) axis(2)) ytitle("", axis(2)) ylabel("'
+r; t=0.00 17:13:54
+
+. local xlabel="xlabel(2002(2)2020)"
+r; t=0.00 17:13:54
+
+. local ylabel="ylabel(0(25)100)"
+r; t=0.00 17:13:54
+
+. local ltype="lpattern(solid)"
+r; t=0.00 17:13:54
+
+. local yaxis
+r; t=0.00 17:13:54
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+r; t=0.00 17:13:54
+
+. local colors=`"`r(p)'"'
+r; t=0.00 17:13:54
+
+. preserve
+r; t=0.00 17:13:54
+
+.         labvarch p_qual_score_?, after(":")
+r; t=0.00 17:13:54
+
+.         forvalues i=0/5 {
+  2.                 local axis
+  3.                 if `i'==0 local axis="yaxis(1)"
+  4.                 if `i'==1 local axis="yaxis(2)"
+  5.                 quietly sum p_qual_score_`i' if year==${max}
+  6.                 local yaxis=`"`yaxis' `r(max)' "`:variable label p_qual_score_`i''""'
+  7.                 local graph=`"`graph' (line p_qual_score_`i' year, lcolor("`:word `cnt' of `colors''") `ltype' `axi
+> s')"'
+  8.                 local ++cnt
+  9.         }
+r; t=0.00 17:13:54
+
+. 
+.         twoway `graph', `yscale1' `yscale2' `assort' `xlabel' `ylabel' ///
+>                 ylab(`yaxis', axis(2))
+parentheses do not balance
+r(198); t=0.00 17:13:54
+
+end of do-file
+
+r(198); t=0.15 17:13:54
+
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. local cnt=1
+r; t=0.00 17:14:14
+
+. local graph
+r; t=0.00 17:14:14
+
+. local assort="plotregion(margin(zero)) legend(off) aspect(1)"
+r; t=0.00 17:14:14
+
+. local yscale1=`"yscale(range(0 100)) ytitle("Percentage of AP exams with a qualifying score")"'
+r; t=0.00 17:14:14
+
+. local yscale2=`"yscale(range(0 100) axis(2) lstyle(none)) ytitle("", axis(2)) ylabel("'
+r; t=0.00 17:14:14
+
+. local xlabel="xlabel(2002(2)2020)"
+r; t=0.00 17:14:14
+
+. local ylabel="ylabel(0(25)100)"
+r; t=0.00 17:14:14
+
+. local ltype="lpattern(solid)"
+r; t=0.00 17:14:14
+
+. local yaxis
+r; t=0.00 17:14:14
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+r; t=0.00 17:14:14
+
+. local colors=`"`r(p)'"'
+r; t=0.00 17:14:14
+
+. preserve
+r; t=0.00 17:14:14
+
+.         labvarch p_qual_score_?, after(":")
+r; t=0.00 17:14:14
+
+.         forvalues i=0/5 {
+  2.                 local axis
+  3.                 if `i'==0 local axis="yaxis(1)"
+  4.                 if `i'==1 local axis="yaxis(2)"
+  5.                 quietly sum p_qual_score_`i' if year==${max}
+  6.                 local yaxis=`"`yaxis' `r(max)' "`:variable label p_qual_score_`i''""'
+  7.                 local graph=`"`graph' (line p_qual_score_`i' year, lcolor("`:word `cnt' of `colors''") `ltype' `axi
+> s')"'
+  8.                 local ++cnt
+  9.         }
+r; t=0.00 17:14:14
+
+. 
+.         twoway `graph', `yscale1' `yscale2' `assort' `xlabel' `ylabel' ///
+>                 ylab(`yaxis', axis(2))
+parentheses do not balance
+r(198); t=0.00 17:14:14
+
+end of do-file
+
+r(198); t=0.00 17:14:14
+
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. local cnt=1
+r; t=0.01 17:14:38
+
+. local graph
+r; t=0.00 17:14:38
+
+. local assort="plotregion(margin(zero)) legend(off) aspect(1)"
+r; t=0.00 17:14:38
+
+. local yscale1=`"yscale(range(0 100)) ytitle("Percentage of AP exams with a qualifying score")"'
+r; t=0.00 17:14:38
+
+. local yscale2=`"yscale(range(0 100) axis(2) lstyle(none)) ytitle("", axis(2))"'
+r; t=0.00 17:14:38
+
+. local xlabel="xlabel(2002(2)2020)"
+r; t=0.00 17:14:38
+
+. local ylabel="ylabel(0(25)100)"
+r; t=0.00 17:14:38
+
+. local ltype="lpattern(solid)"
+r; t=0.00 17:14:38
+
+. local yaxis
+r; t=0.00 17:14:38
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+r; t=0.00 17:14:38
+
+. local colors=`"`r(p)'"'
+r; t=0.00 17:14:38
+
+. preserve
+r; t=0.00 17:14:38
+
+.         labvarch p_qual_score_?, after(":")
+r; t=0.00 17:14:38
+
+.         forvalues i=0/5 {
+  2.                 local axis
+  3.                 if `i'==0 local axis="yaxis(1)"
+  4.                 if `i'==1 local axis="yaxis(2)"
+  5.                 quietly sum p_qual_score_`i' if year==${max}
+  6.                 local yaxis=`"`yaxis' `r(max)' "`:variable label p_qual_score_`i''""'
+  7.                 local graph=`"`graph' (line p_qual_score_`i' year, lcolor("`:word `cnt' of `colors''") `ltype' `axi
+> s')"'
+  8.                 local ++cnt
+  9.         }
+r; t=0.00 17:14:38
+
+. 
+.         twoway `graph', `yscale1' `yscale2' `assort' `xlabel' `ylabel' ///
+>                 ylab(`yaxis', axis(2))
+r; t=1.57 17:14:39
+
+. 
+end of do-file
+
+r; t=1.65 17:14:39
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. local cnt=1
+r; t=0.00 17:14:52
+
+. local graph
+r; t=0.00 17:14:52
+
+. local assort="plotregion(margin(zero)) legend(off) aspect(1)"
+r; t=0.00 17:14:52
+
+. local yscale1=`"yscale(range(0 100)) ytitle("Percentage of AP exams with a qualifying score")"'
+r; t=0.00 17:14:52
+
+. local yscale2=`"yscale(range(0 100) axis(2) lticks(none) lstyle(none)) ytitle("", axis(2))"'
+r; t=0.00 17:14:52
+
+. local xlabel="xlabel(2002(2)2020)"
+r; t=0.00 17:14:52
+
+. local ylabel="ylabel(0(25)100)"
+r; t=0.00 17:14:52
+
+. local ltype="lpattern(solid)"
+r; t=0.00 17:14:52
+
+. local yaxis
+r; t=0.00 17:14:52
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+r; t=0.00 17:14:52
+
+. local colors=`"`r(p)'"'
+r; t=0.00 17:14:52
+
+. preserve
+r; t=0.00 17:14:52
+
+.         labvarch p_qual_score_?, after(":")
+r; t=0.00 17:14:52
+
+.         forvalues i=0/5 {
+  2.                 local axis
+  3.                 if `i'==0 local axis="yaxis(1)"
+  4.                 if `i'==1 local axis="yaxis(2)"
+  5.                 quietly sum p_qual_score_`i' if year==${max}
+  6.                 local yaxis=`"`yaxis' `r(max)' "`:variable label p_qual_score_`i''""'
+  7.                 local graph=`"`graph' (line p_qual_score_`i' year, lcolor("`:word `cnt' of `colors''") `ltype' `axi
+> s')"'
+  8.                 local ++cnt
+  9.         }
+r; t=0.00 17:14:52
+
+. 
+.         twoway `graph', `yscale1' `yscale2' `assort' `xlabel' `ylabel' ///
+>                 ylab(`yaxis', axis(2))
+option lticks() not allowed
+r(198); t=1.50 17:14:53
+
+end of do-file
+
+r(198); t=1.51 17:14:53
+
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. local cnt=1
+r; t=0.03 17:15:36
+
+. local graph
+r; t=0.00 17:15:36
+
+. local assort="plotregion(margin(zero)) legend(off) aspect(1)"
+r; t=0.00 17:15:36
+
+. local yscale1=`"yscale(range(0 100)) ytitle("Percentage of AP exams with a qualifying score")"'
+r; t=0.00 17:15:36
+
+. local yscale2=`"yscale(range(0 100) axis(2) lticks(none) lstyle(none)) ylabel(, notick) ytitle("", axis(2))"'
+r; t=0.00 17:15:36
+
+. local xlabel="xlabel(2002(2)2020)"
+r; t=0.00 17:15:36
+
+. local ylabel="ylabel(0(25)100)"
+r; t=0.00 17:15:36
+
+. local ltype="lpattern(solid)"
+r; t=0.00 17:15:36
+
+. local yaxis
+r; t=0.00 17:15:36
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+r; t=0.00 17:15:36
+
+. local colors=`"`r(p)'"'
+r; t=0.00 17:15:36
+
+. preserve
+r; t=0.00 17:15:36
+
+.         labvarch p_qual_score_?, after(":")
+r; t=0.00 17:15:36
+
+.         forvalues i=0/5 {
+  2.                 local axis
+  3.                 if `i'==0 local axis="yaxis(1)"
+  4.                 if `i'==1 local axis="yaxis(2)"
+  5.                 quietly sum p_qual_score_`i' if year==${max}
+  6.                 local yaxis=`"`yaxis' `r(max)' "`:variable label p_qual_score_`i''""'
+  7.                 local graph=`"`graph' (line p_qual_score_`i' year, lcolor("`:word `cnt' of `colors''") `ltype' `axi
+> s')"'
+  8.                 local ++cnt
+  9.         }
+r; t=0.00 17:15:36
+
+. 
+.         twoway `graph', `yscale1' `yscale2' `assort' `xlabel' `ylabel' ///
+>                 ylab(`yaxis', axis(2))
+option lticks() not allowed
+r(198); t=1.56 17:15:38
+
+end of do-file
+
+r(198); t=1.63 17:15:38
+
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. local cnt=1
+r; t=0.00 17:15:48
+
+. local graph
+r; t=0.00 17:15:48
+
+. local assort="plotregion(margin(zero)) legend(off) aspect(1)"
+r; t=0.00 17:15:48
+
+. local yscale1=`"yscale(range(0 100)) ytitle("Percentage of AP exams with a qualifying score")"'
+r; t=0.00 17:15:48
+
+. local yscale2=`"yscale(range(0 100) axis(2) lstyle(none)) ylabel(, notick) ytitle("", axis(2))"'
+r; t=0.00 17:15:48
+
+. local xlabel="xlabel(2002(2)2020)"
+r; t=0.00 17:15:48
+
+. local ylabel="ylabel(0(25)100)"
+r; t=0.00 17:15:48
+
+. local ltype="lpattern(solid)"
+r; t=0.00 17:15:48
+
+. local yaxis
+r; t=0.00 17:15:48
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+r; t=0.00 17:15:48
+
+. local colors=`"`r(p)'"'
+r; t=0.00 17:15:48
+
+. preserve
+r; t=0.00 17:15:48
+
+.         labvarch p_qual_score_?, after(":")
+r; t=0.00 17:15:48
+
+.         forvalues i=0/5 {
+  2.                 local axis
+  3.                 if `i'==0 local axis="yaxis(1)"
+  4.                 if `i'==1 local axis="yaxis(2)"
+  5.                 quietly sum p_qual_score_`i' if year==${max}
+  6.                 local yaxis=`"`yaxis' `r(max)' "`:variable label p_qual_score_`i''""'
+  7.                 local graph=`"`graph' (line p_qual_score_`i' year, lcolor("`:word `cnt' of `colors''") `ltype' `axi
+> s')"'
+  8.                 local ++cnt
+  9.         }
+r; t=0.00 17:15:48
+
+. 
+.         twoway `graph', `yscale1' `yscale2' `assort' `xlabel' `ylabel' ///
+>                 ylab(`yaxis', axis(2))
+r; t=2.21 17:15:51
+
+. 
+end of do-file
+
+r; t=2.22 17:15:51
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. local cnt=1
+r; t=0.03 17:16:09
+
+. local graph
+r; t=0.00 17:16:09
+
+. local assort="plotregion(margin(zero)) legend(off) aspect(1)"
+r; t=0.00 17:16:09
+
+. local yscale1=`"yscale(range(0 100)) ytitle("Percentage of AP exams with a qualifying score")"'
+r; t=0.00 17:16:09
+
+. local yscale2=`"yscale(range(0 100) axis(2) lstyle(none)) ylabel(, notick axis(2)) ytitle("", axis(2))"'
+r; t=0.00 17:16:09
+
+. local xlabel="xlabel(2002(2)2020)"
+r; t=0.00 17:16:09
+
+. local ylabel="ylabel(0(25)100)"
+r; t=0.00 17:16:09
+
+. local ltype="lpattern(solid)"
+r; t=0.00 17:16:09
+
+. local yaxis
+r; t=0.00 17:16:09
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+r; t=0.00 17:16:09
+
+. local colors=`"`r(p)'"'
+r; t=0.00 17:16:09
+
+. preserve
+r; t=0.00 17:16:09
+
+.         labvarch p_qual_score_?, after(":")
+r; t=0.00 17:16:09
+
+.         forvalues i=0/5 {
+  2.                 local axis
+  3.                 if `i'==0 local axis="yaxis(1)"
+  4.                 if `i'==1 local axis="yaxis(2)"
+  5.                 quietly sum p_qual_score_`i' if year==${max}
+  6.                 local yaxis=`"`yaxis' `r(max)' "`:variable label p_qual_score_`i''""'
+  7.                 local graph=`"`graph' (line p_qual_score_`i' year, lcolor("`:word `cnt' of `colors''") `ltype' `axi
+> s')"'
+  8.                 local ++cnt
+  9.         }
+r; t=0.00 17:16:09
+
+. 
+.         twoway `graph', `yscale1' `yscale2' `assort' `xlabel' `ylabel' ///
+>                 ylab(`yaxis', axis(2))
+r; t=1.82 17:16:11
+
+. 
+end of do-file
+
+r; t=1.91 17:16:11
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. local cnt=1
+r; t=0.00 17:16:39
+
+. local graph
+r; t=0.00 17:16:39
+
+. local assort="plotregion(margin(zero)) legend(off) aspect(1)"
+r; t=0.00 17:16:39
+
+. local yscale1=`"yscale(range(0 100)) ytitle("Percentage of AP exams with a qualifying score")"'
+r; t=0.00 17:16:39
+
+. local yscale2=`"yscale(range(0 100) axis(2) lstyle(none)) ylabel(, notick axis(2)) ytitle("", axis(2))"'
+r; t=0.00 17:16:39
+
+. local xlabel="xlabel(${min}(2)${max})"
+r; t=0.00 17:16:39
+
+. local ylabel="ylabel(0(25)100)"
+r; t=0.00 17:16:39
+
+. local ltype="lpattern(solid)"
+r; t=0.00 17:16:39
+
+. local yaxis
+r; t=0.00 17:16:39
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+r; t=0.00 17:16:39
+
+. local colors=`"`r(p)'"'
+r; t=0.00 17:16:39
+
+. preserve
+r; t=0.00 17:16:39
+
+.         labvarch p_qual_score_?, after(":")
+r; t=0.00 17:16:39
+
+.         forvalues i=0/5 {
+  2.                 local axis
+  3.                 if `i'==0 local axis="yaxis(1)"
+  4.                 if `i'==1 local axis="yaxis(2)"
+  5.                 quietly sum p_qual_score_`i' if year==${max}
+  6.                 local yaxis=`"`yaxis' `r(max)' "`:variable label p_qual_score_`i''""'
+  7.                 local graph=`"`graph' (line p_qual_score_`i' year, lcolor("`:word `cnt' of `colors''") `ltype' `axi
+> s')"'
+  8.                 local ++cnt
+  9.         }
+r; t=0.00 17:16:39
+
+. 
+.         twoway `graph', `yscale1' `yscale2' `assort' `xlabel' `ylabel' ///
+>                 ylab(`yaxis', axis(2))
+r; t=1.81 17:16:41
+
+. 
+end of do-file
+
+r; t=1.82 17:16:41
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. *Load file
+. use "${final}ap_test_data_2002_2020.dta", clear
+r; t=0.39 17:17:56
+
+. drop if year==2020
+(1 observation deleted)
+r; t=0.00 17:17:56
+
+. local graph
+r; t=0.00 17:17:56
+
+. 
+. // create the graph
+. cap drop zero
+r; t=0.00 17:17:56
+
+. cap drop l?
+r; t=0.00 17:17:56
+
+. gen zero = 0
+r; t=0.00 17:17:56
+
+. gen l1 = (p_T_0)
+r; t=0.00 17:17:56
+
+. gen l2 = (p_T_0 + p_T_1)
+r; t=0.00 17:17:56
+
+. gen l3 = (p_T_0 + p_T_1+p_T_2)
+r; t=0.00 17:17:56
+
+. gen l4 = (p_T_0 + p_T_1+p_T_2+p_T_3)
+r; t=0.00 17:17:56
+
+. gen l5 = (p_T_0 + p_T_1+p_T_2+p_T_3+p_T_4)
+r; t=0.00 17:17:56
+
+. gen l6 = (p_T_0 + p_T_1+p_T_2+p_T_3+p_T_4+p_T_5)
+r; t=0.00 17:17:56
+
+. 
+. sort year
+r; t=0.00 17:17:56
+
+. quietly sum year
+r; t=0.00 17:17:56
+
+. global min=`r(min)'
+r; t=0.00 17:17:56
+
+. global max=`r(max)'
+r; t=0.00 17:17:56
+
+. // collect the labels for the second y-axis
+. quietly sum p_T_0 if year==${min}
+r; t=0.00 17:17:56
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:17:56
+
+. quietly sum p_T_0 if year==${max}
+r; t=0.00 17:17:56
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:17:56
+
+. local mid = l1[_N]/2
+r; t=0.00 17:17:56
+
+. local yaxis `"`mid' "Am. Ind.:`l11'%-`l12'%""'
+r; t=0.00 17:17:56
+
+. 
+. quietly sum p_T_1 if year==${min}
+r; t=0.00 17:17:56
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:17:56
+
+. quietly sum p_T_1 if year==${max}
+r; t=0.00 17:17:56
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:17:56
+
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+r; t=0.00 17:17:56
+
+. local yaxis `"`yaxis' `mid' "Asian:`l11'%-`l12'%""'
+r; t=0.00 17:17:56
+
+. 
+. quietly sum p_T_2 if year==${min}
+r; t=0.00 17:17:56
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:17:56
+
+. quietly sum p_T_2 if year==${max}
+r; t=0.00 17:17:56
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:17:56
+
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+r; t=0.00 17:17:56
+
+. local yaxis `"`yaxis' `mid' "Hispanic:`l11'%-`l12'%""'
+r; t=0.00 17:17:56
+
+. 
+. quietly sum p_T_3 if year==${min}
+r; t=0.00 17:17:56
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:17:56
+
+. quietly sum p_T_3 if year==${max}
+r; t=0.00 17:17:56
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:17:56
+
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+r; t=0.00 17:17:56
+
+. local yaxis `"`yaxis' `mid' "Black:`l11'%-`l12'%""'
+r; t=0.00 17:17:56
+
+. 
+. quietly sum p_T_4 if year==${min}
+r; t=0.00 17:17:56
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:17:56
+
+. quietly sum p_T_4 if year==${max}
+r; t=0.00 17:17:56
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:17:56
+
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+r; t=0.00 17:17:56
+
+. local yaxis `"`yaxis' `mid' "White:`l11'%-`l12'%""'
+r; t=0.00 17:17:56
+
+. 
+. quietly sum p_T_5 if year==${min}
+r; t=0.00 17:17:56
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:17:56
+
+. quietly sum p_T_5 if year==${max}
+r; t=0.00 17:17:56
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:17:56
+
+. local mid = (100-l5[_N])/2 + l5[_N]
+r; t=0.00 17:17:56
+
+. local yaxis `"`yaxis' `mid' "Other:`l11'%-`l12'%""'
+r; t=0.00 17:17:56
+
+. 
+. local lcolors="lwidth(none)"
+r; t=0.00 17:17:56
+
+. colorpalette viridis, nograph
+r; t=0.00 17:17:56
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP exam-takers ")              ///
+> ylab(`yaxis', axis(2) notick) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2) lstyle(none))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+r; t=1.19 17:17:57
+
+. graphsout "${results}fig_1", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.svg written in SVG format)
+r; t=1.02 17:17:58
+
+. 
+. local cnt=1
+r; t=0.00 17:17:58
+
+. local graph
+r; t=0.00 17:17:58
+
+. local assort="plotregion(margin(zero)) legend(off) aspect(1)"
+r; t=0.00 17:17:58
+
+. local yscale1=`"yscale(range(0 100)) ytitle("Percentage of AP exams with a qualifying score")"'
+r; t=0.00 17:17:58
+
+. local yscale2=`"yscale(range(0 100) axis(2) lstyle(none)) ylabel(, notick axis(2)) ytitle("", axis(2))"'
+r; t=0.00 17:17:58
+
+. local xlabel="xlabel(${min}(2)${max})"
+r; t=0.00 17:17:58
+
+. local ylabel="ylabel(0(25)100)"
+r; t=0.00 17:17:58
+
+. local ltype="lpattern(solid)"
+r; t=0.00 17:17:58
+
+. local yaxis
+r; t=0.00 17:17:58
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+r; t=0.00 17:17:58
+
+. local colors=`"`r(p)'"'
+r; t=0.00 17:17:58
+
+. preserve
+r; t=0.00 17:17:58
+
+.         labvarch p_qual_score_?, after(":")
+r; t=0.00 17:17:58
+
+.         forvalues i=0/5 {
+  2.                 local axis
+  3.                 if `i'==0 local axis="yaxis(1)"
+  4.                 if `i'==1 local axis="yaxis(2)"
+  5.                 quietly sum p_qual_score_`i' if year==${max}
+  6.                 local yaxis=`"`yaxis' `r(max)' "`:variable label p_qual_score_`i''""'
+  7.                 local graph=`"`graph' (line p_qual_score_`i' year, lcolor("`:word `cnt' of `colors''") `ltype' `axi
+> s')"'
+  8.                 local ++cnt
+  9.         }
+r; t=0.00 17:17:58
+
+. 
+.         twoway `graph', `yscale1' `yscale2' `assort' `xlabel' `ylabel' ///
+>                 ylab(`yaxis', axis(2))
+r; t=1.34 17:17:59
+
+. graphsout "${results}fig_2", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_2.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_2.svg written in SVG format)
+r; t=0.86 17:18:00
+
+. 
+. restore
+r; t=0.00 17:18:00
+
+. 
+end of do-file
+
+r; t=4.96 17:18:00
+. do "/var/folders/89/rq2wtq1950qf9fhbf5w4w6cw0000gn/T//SD63632.000000"
+
+. use "${final}ap_test_data_2002_2020.dta", clear
+r; t=0.28 17:18:32
+
+. drop if year==2020
+(1 observation deleted)
+r; t=0.00 17:18:32
+
+. local graph
+r; t=0.00 17:18:32
+
+. 
+. // create the graph
+. cap drop zero
+r; t=0.00 17:18:32
+
+. cap drop l?
+r; t=0.00 17:18:32
+
+. gen zero = 0
+r; t=0.00 17:18:32
+
+. gen l1 = (p_T_0)
+r; t=0.00 17:18:32
+
+. gen l2 = (p_T_0 + p_T_1)
+r; t=0.00 17:18:32
+
+. gen l3 = (p_T_0 + p_T_1+p_T_2)
+r; t=0.00 17:18:32
+
+. gen l4 = (p_T_0 + p_T_1+p_T_2+p_T_3)
+r; t=0.00 17:18:32
+
+. gen l5 = (p_T_0 + p_T_1+p_T_2+p_T_3+p_T_4)
+r; t=0.00 17:18:32
+
+. gen l6 = (p_T_0 + p_T_1+p_T_2+p_T_3+p_T_4+p_T_5)
+r; t=0.00 17:18:32
+
+. 
+. sort year
+r; t=0.00 17:18:32
+
+. quietly sum year
+r; t=0.00 17:18:32
+
+. global min=`r(min)'
+r; t=0.00 17:18:32
+
+. global max=`r(max)'
+r; t=0.00 17:18:32
+
+. // collect the labels for the second y-axis
+. quietly sum p_T_0 if year==${min}
+r; t=0.00 17:18:32
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:18:32
+
+. quietly sum p_T_0 if year==${max}
+r; t=0.00 17:18:32
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:18:32
+
+. local mid = l1[_N]/2
+r; t=0.00 17:18:32
+
+. local yaxis `"`mid' "Am. Ind.:`l11'%-`l12'%""'
+r; t=0.00 17:18:32
+
+. 
+. quietly sum p_T_1 if year==${min}
+r; t=0.00 17:18:32
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:18:32
+
+. quietly sum p_T_1 if year==${max}
+r; t=0.00 17:18:32
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:18:32
+
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+r; t=0.00 17:18:32
+
+. local yaxis `"`yaxis' `mid' "Asian:`l11'%-`l12'%""'
+r; t=0.00 17:18:32
+
+. 
+. quietly sum p_T_2 if year==${min}
+r; t=0.00 17:18:32
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:18:32
+
+. quietly sum p_T_2 if year==${max}
+r; t=0.00 17:18:32
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:18:32
+
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+r; t=0.00 17:18:32
+
+. local yaxis `"`yaxis' `mid' "Hispanic:`l11'%-`l12'%""'
+r; t=0.00 17:18:32
+
+. 
+. quietly sum p_T_3 if year==${min}
+r; t=0.00 17:18:32
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:18:32
+
+. quietly sum p_T_3 if year==${max}
+r; t=0.00 17:18:32
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:18:32
+
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+r; t=0.00 17:18:32
+
+. local yaxis `"`yaxis' `mid' "Black:`l11'%-`l12'%""'
+r; t=0.00 17:18:32
+
+. 
+. quietly sum p_T_4 if year==${min}
+r; t=0.00 17:18:32
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:18:32
+
+. quietly sum p_T_4 if year==${max}
+r; t=0.00 17:18:32
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:18:32
+
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+r; t=0.00 17:18:32
+
+. local yaxis `"`yaxis' `mid' "White:`l11'%-`l12'%""'
+r; t=0.00 17:18:32
+
+. 
+. quietly sum p_T_5 if year==${min}
+r; t=0.00 17:18:32
+
+. local l11: di %5.1f `r(max)'
+r; t=0.00 17:18:32
+
+. quietly sum p_T_5 if year==${max}
+r; t=0.00 17:18:32
+
+. local l12: di %5.1f `r(max)'
+r; t=0.00 17:18:32
+
+. local mid = (100-l5[_N])/2 + l5[_N]
+r; t=0.00 17:18:32
+
+. local yaxis `"`yaxis' `mid' "Other:`l11'%-`l12'%""'
+r; t=0.00 17:18:32
+
+. 
+. local lcolors="lwidth(none)"
+r; t=0.00 17:18:32
+
+. colorpalette viridis, nograph
+r; t=0.00 17:18:32
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP exam-takers ")              ///
+> ylab(`yaxis', axis(2) notick) ///
+> xlab(${min}(2)${max}) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2) lstyle(none))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+r; t=1.93 17:18:34
+
+. graphsout "${results}fig_1", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_1.svg written in SVG format)
+r; t=4.69 17:18:39
+
+. 
+. local cnt=1
+r; t=0.00 17:18:39
+
+. local graph
+r; t=0.00 17:18:39
+
+. local assort="plotregion(margin(zero)) legend(off) aspect(1)"
+r; t=0.00 17:18:39
+
+. local yscale1=`"yscale(range(0 100)) ytitle("Percentage of AP exams with a qualifying score")"'
+r; t=0.00 17:18:39
+
+. local yscale2=`"yscale(range(0 100) axis(2) lstyle(none)) ylabel(, notick axis(2)) ytitle("", axis(2))"'
+r; t=0.00 17:18:39
+
+. local xlabel="xlabel(${min}(2)${max})"
+r; t=0.00 17:18:39
+
+. local ylabel="ylabel(0(25)100)"
+r; t=0.00 17:18:39
+
+. local ltype="lpattern(solid)"
+r; t=0.00 17:18:39
+
+. local yaxis
+r; t=0.00 17:18:39
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+r; t=0.45 17:18:39
+
+. local colors=`"`r(p)'"'
+r; t=0.00 17:18:39
+
+. preserve
+r; t=0.00 17:18:39
+
+.         labvarch p_qual_score_?, after(":")
+r; t=0.00 17:18:39
+
+.         forvalues i=0/5 {
+  2.                 local axis
+  3.                 if `i'==0 local axis="yaxis(1)"
+  4.                 if `i'==1 local axis="yaxis(2)"
+  5.                 quietly sum p_qual_score_`i' if year==${max}
+  6.                 local yaxis=`"`yaxis' `r(max)' "`:variable label p_qual_score_`i''""'
+  7.                 local graph=`"`graph' (line p_qual_score_`i' year, lcolor("`:word `cnt' of `colors''") `ltype' `axi
+> s')"'
+  8.                 local ++cnt
+  9.         }
+r; t=0.00 17:18:39
+
+. 
+.         twoway `graph', `yscale1' `yscale2' `assort' `xlabel' `ylabel' ///
+>                 ylab(`yaxis', axis(2))
+r; t=1.33 17:18:41
+
+. graphsout "${results}fig_2", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_2.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_2.svg written in SVG format)
+r; t=1.14 17:18:42
+
+. restore
+r; t=0.00 17:18:42
+
+. 
+end of do-file
+
+r; t=9.96 17:18:42

@@ -1,0 +1,1744 @@
+-------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Volumes/shared//data//goofin//ap_data//logs/1_exploring_ap_data_25_Jan_2021.t
+> xt
+  log type:  text
+ opened on:  25 Jan 2021, 23:54:48
+
+. 
+. 
+. *Load file
+. use "${final}ap_test_data_2002_2020.dta", clear
+
+. local graph
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+
+. local colors=`"`r(p)'"'
+
+. local graph 
+
+. clonevar new = n_T_0 
+
+. forval j = 1/5 { 
+  2.     local k = `j' - 1 
+  3.     gen show`j' = show`k' + n_T_`j'
+  4.     _crcslbl show`j' n_T_`j'
+  5. }
+show0 not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+
+. local colors=`"`r(p)'"'
+
+. local graph 
+
+. cap drop show?
+
+. clonevar show0 = n_T_0 
+
+. forval j = 1/5 { 
+  2.     local k = `j' - 1 
+  3.     gen show`j' = show`k' + n_T_`j'
+  4.     _crcslbl show`j' n_T_`j'
+  5. }
+
+. 
+. forval j = 5(-1)0 { 
+  2.     local graph `graph' show`j'
+  3. }
+
+. 
+. local ytitle="Total number of AP test-takers"
+
+. local xlabel="xlabel(2002(2)2020)"
+
+. twoway area `graph' year, `xlabel' xtitle("") ////
+> col(`colors') `lcolors'
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+
+. local colors=`"`r(p)'"'
+
+. local graph 
+
+. cap drop show?
+
+. clonevar show0 = n_T_0 
+
+. forval j = 1/5 { 
+  2.     local k = `j' - 1 
+  3.     gen show`j' = show`k' + n_T_`j'
+  4.     _crcslbl show`j' n_T_`j'
+  5. }
+
+. 
+. forval j = 4(-1)0 { 
+  2.     local graph `graph' show`j'
+  3. }
+
+. 
+. local ytitle="Total number of AP test-takers"
+
+. local xlabel="xlabel(2002(2)2020)"
+
+. twoway area show5 year, axis(1) || ///
+>         area `graph', axis(2), `xlabel' xtitle("") ////
+> col(`colors') `lcolors' legend(off) 
+option axis() not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+
+. local colors=`"`r(p)'"'
+
+. local graph 
+
+. cap drop show?
+
+. clonevar show0 = n_T_0 
+
+. forval j = 1/5 { 
+  2.     local k = `j' - 1 
+  3.     gen show`j' = show`k' + n_T_`j'
+  4.     _crcslbl show`j' n_T_`j'
+  5. }
+
+. 
+. forval j = 4(-1)0 { 
+  2.     local graph `graph' show`j'
+  3. }
+
+. 
+. local ytitle="Total number of AP test-takers"
+
+. local xlabel="xlabel(2002(2)2020)"
+
+. twoway area show5 year, axis(1) || ///
+>         area `graph', axis(2) `xlabel' xtitle("") ////
+> col(`colors') `lcolors' legend(off) 
+option axis() not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. twoway (area n_2_0 n_2_0), yscale(alt)
+
+. twoway (area n_2_0 n_2_0), axis(1)
+option axis() not allowed
+r(198);
+
+. twoway (area n_2_0 n_2_0, axis(1))
+option axis() not allowed
+r(198);
+
+. drop show*
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph select(1 3 6 9 12 15)
+
+. local colors=`"`r(p)'"'
+
+. local graph 
+
+. cap drop l?
+
+. clonevar l0 = n_T_0 
+
+. forval j = 1/5 { 
+  2.     local k = `j' - 1 
+  3.     gen l`j' = l`k' + n_T_`j'
+  4.     _crcslbl l`j' n_T_`j'
+  5. }
+
+. 
+. forval j = 5(-1)0 { 
+  2.     local graph `graph' l`j'
+  3. }
+
+. 
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (100-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea l0 l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. colorpalette viridis, nograph
+
+. 
+end of do-file
+
+. return list
+
+scalars:
+                  r(n) =  15
+
+macros:
+              r(ptype) : "color"
+              r(pname) : "viridis"
+              r(pnote) : "viridis colormap from matplotlib.org"
+            r(psource) : "https://github.com/matplotlib/matplotlib/blob/master/lib/matp.."
+             r(pclass) : "sequential"
+                  r(p) : ""68 1 84" "72 27 109" "70 50 127" "63 72 137" "54 92 141" "46.."
+                r(p15) : "253 231 37"
+                r(p14) : "207 225 28"
+                r(p13) : "159 218 58"
+                r(p12) : "113 207 86"
+                r(p11) : "74 194 109"
+                r(p10) : "45 178 125"
+                 r(p9) : "31 161 135"
+                 r(p8) : "33 144 140"
+                 r(p7) : "39 127 142"
+                 r(p6) : "46 110 142"
+                 r(p5) : "54 92 141"
+                 r(p4) : "63 72 137"
+                 r(p3) : "70 50 127"
+                 r(p2) : "72 27 109"
+                 r(p1) : "68 1 84"
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea l0 l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea l0 l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> *rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> *rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> *rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+* rarea is not a twoway plot type
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea l0 l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> 
+
+. rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+command rarea is unrecognized
+r(199);
+
+end of do-file
+
+r(199);
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea l0 l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> 
+
+. rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+command rarea is unrecognized
+r(199);
+
+end of do-file
+
+r(199);
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea l0 l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea l0 l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 n_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. cap drop l?
+
+. clonevar l0 = n_T_0 
+
+. forval j = 1/5 { 
+  2.     local k = `j' - 1 
+  3.     gen l`j' = l`k' + n_T_`j'
+  4.     _crcslbl l`j' n_T_`j'
+  5.         labvarch l`j', before(":")
+  6. }
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea l0 l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 n_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea l0 l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 n_T_6 year, `lcolors' color("`r(p15)'")               ///
+> ytitle("Percentage of all AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. gen zero=0
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 p_T_6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of a
+> ll AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 n_T_6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of a
+> ll AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local graph 
+
+. cap drop zero
+
+. cap drop l?
+
+. gen zero = 0
+
+. gen l1 = (n_T_0)
+
+. gen l2 = (n_T_0 + n_T_1)
+
+. gen l3 = (n_T_0 + n_T_1+n_T_2)
+
+. gen l4 = (n_T_0 + n_T_1+n_T_2+n_T_3)
+
+. gen l5 = (n_T_0 + n_T_1+n_T_2+n_T_3+n_T_4)
+
+. gen l6 = (n_T_0 + n_T_1+n_T_2+n_T_3+n_T_4+n_T_5)
+
+. 
+. gen zero=0
+variable zero already defined
+r(110);
+
+end of do-file
+
+r(110);
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local graph 
+
+. cap drop zero
+
+. cap drop l?
+
+. gen zero = 0
+
+. gen l1 = (n_T_0)
+
+. gen l2 = (n_T_0 + n_T_1)
+
+. gen l3 = (n_T_0 + n_T_1+n_T_2)
+
+. gen l4 = (n_T_0 + n_T_1+n_T_2+n_T_3)
+
+. gen l5 = (n_T_0 + n_T_1+n_T_2+n_T_3+n_T_4)
+
+. gen l6 = (n_T_0 + n_T_1+n_T_2+n_T_3+n_T_4+n_T_5)
+
+. 
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (100-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 n_T_6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of a
+> ll AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (n_T_6-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 n_T_6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of a
+> ll AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))               ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (n_T_6[_N]-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 n_T_6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of a
+> ll AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))   
+
+. ytitle("Total number of AP test-takers")            ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+command ytitle is unrecognized
+r(199);
+
+end of do-file
+
+r(199);
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (n_T_6[_N]-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 n_T_6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of a
+> ll AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))   
+
+. ytitle("Total number of AP test-takers")            ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+command ytitle is unrecognized
+r(199);
+
+end of do-file
+
+r(199);
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (n_T_6[_N]-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 n_T_6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of a
+> ll AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))   ///
+> ytitle("Total number of AP test-takers")            ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (n_T_6[_N]-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 n_T_6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of a
+> ll AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))   ///
+> ytitle("Total number of AP test-takers")            ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. 
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (n_T_6[_N]-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 n_T_6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of a
+> ll AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))   ///
+> ytitle("Total number of AP test-takers")            ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (l6[_N]-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 l6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of all 
+> AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))   ///
+> ytitle("Total number of AP test-takers")            ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (l6[_N]-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 l6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of all 
+> AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))   ///
+> ytitle("Total number of AP test-takers")            ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (l6[_N]-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 l6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of all 
+> AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))   ///
+> ytitle("Total number of AP test-takers")            ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+. graphsout "${results}fig_3", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_3.pdf written in PDF format)
+(note: file /Volumes/shared//data//goofin//ap_data/results/fig_3.svg not found)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_3.svg written in SVG format)
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. clear
+
+. *Step 7, with final cleanup
+. cd "${converted}"
+/Volumes/Shared/data/goofin/ap_data/converted
+
+. quietly fs ap_race*.dta
+
+. append using `r(files)', force
+(note: variable group was str26, now str29 to accommodate using data's values)
+
+. *Consolidating categories
+. cap drop group2
+
+. gen group2=.
+(190 missing values generated)
+
+. replace group2=0 if regexm(group, `"(AMER IND./ALASK|AMERICAN)"') //am ind/alask nat
+(29 real changes made)
+
+. replace group2=1 if regexm(group, `"(ASIAN|HAWAIIAN)"') //asian/pac island
+(24 real changes made)
+
+. replace group2=2 if regexm(group, `"(HISPANIC|LATINO|MEXICAN|PUERTO)"') //hispanic/latino
+(47 real changes made)
+
+. replace group2=3 if regexm(group, `"(BLACK)"') //black
+(19 real changes made)
+
+. replace group2=4 if regexm(group, `"(WHITE)"') //white
+(19 real changes made)
+
+. replace group2=5 if regexm(group, `"(STATED|TWO|RESPONSE)"') //other (including two or mo
+> re, not stated, and other
+(24 real changes made)
+
+. replace group2=6 if regexm(group, `"(NATIONAL)"')
+(19 real changes made)
+
+. replace group2=5 if group=="OTHER"
+(19 real changes made)
+
+. assert group2!=.
+
+. drop group
+
+. rename group2 group
+
+. collapse (sum) n_*, by(group year)
+
+. renvars n_*, postfix(_)
+
+. label define group2 0 "Am. Ind./Alask. Nat." 1 "Asian" 2 "Hispanic" 3 "Black" 4 ///
+>         "White" 5 "Other" 6 "Total", modify
+
+. label values group group2
+
+. tempfile yyy
+
+. label save group2 using `yyy', replace
+(note: file /var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//S_01633.000001 not found)
+file /var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//S_01633.000001 saved
+
+. reshape wide n_*, i(year) j(group)
+(note: j = 0 1 2 3 4 5 6)
+
+Data                               long   ->   wide
+-----------------------------------------------------------------------------
+Number of obs.                      133   ->      19
+Number of variables                   8   ->      43
+j variable (7 values)             group   ->   (dropped)
+xij variables:
+                                   n_1_   ->   n_1_0 n_1_1 ... n_1_6
+                                   n_2_   ->   n_2_0 n_2_1 ... n_2_6
+                                   n_3_   ->   n_3_0 n_3_1 ... n_3_6
+                                   n_4_   ->   n_4_0 n_4_1 ... n_4_6
+                                   n_5_   ->   n_5_0 n_5_1 ... n_5_6
+                                   n_T_   ->   n_T_0 n_T_1 ... n_T_6
+-----------------------------------------------------------------------------
+
+. quietly do `yyy'
+
+. quietly label list group2
+
+. forvalues i=`r(min)'/`r(max)' {
+  2.         foreach var of varlist n_*_`i' {
+  3.                 tokenize `var', parse("_")
+  4.                 local score
+  5.                 if "`3'"!="T" {
+  6.                         local score=`3'
+  7.                 }
+  8.                 else {
+  9.                         local score="Total test-takers"
+ 10.                 }
+ 11.                 label variable `var' `"`:label group2 `i'': `score' (count)"'
+ 12.         }
+ 13.         
+.         cap drop p_T_`i'
+ 14.         gen p_T_`i'=(n_T_`i'/n_T_6)*100
+ 15.         label variable p_T_`i' `"`:label group2 `i'' (percent)"'
+ 16.         
+.         *Now, percentage with a qualifying score.
+.         cap drop p_qual_score_`i'
+ 17.         gen p_qual_score_`i'=((n_3_`i'+n_4_`i'+n_5_`i')/n_T_`i')*100
+ 18.         label variable p_qual_score_`i' `"Percentage with a qualifying score: `:label 
+> group2 `i''"'
+ 19. }
+
+. 
+. label variable year "Testing year"
+
+. compress
+  variable p_T_6 was float now byte
+  variable n_1_0 was double now int
+  variable n_2_0 was double now int
+  variable n_3_0 was double now int
+  variable n_4_0 was double now int
+  variable n_5_0 was double now int
+  variable n_T_0 was double now int
+  variable n_1_1 was double now long
+  variable n_2_1 was double now long
+  variable n_3_1 was double now long
+  variable n_4_1 was double now long
+  variable n_5_1 was double now long
+  variable n_T_1 was double now long
+  variable n_1_2 was double now long
+  variable n_2_2 was double now long
+  variable n_3_2 was double now long
+  variable n_4_2 was double now long
+  variable n_5_2 was double now long
+  variable n_T_2 was double now long
+  variable n_1_3 was double now long
+  variable n_2_3 was double now long
+  variable n_3_3 was double now long
+  variable n_4_3 was double now int
+  variable n_5_3 was double now int
+  variable n_T_3 was double now long
+  variable n_1_4 was double now long
+  variable n_2_4 was double now long
+  variable n_3_4 was double now long
+  variable n_4_4 was double now long
+  variable n_5_4 was double now long
+  variable n_T_4 was double now long
+  variable n_1_5 was double now long
+  variable n_2_5 was double now long
+  variable n_3_5 was double now long
+  variable n_4_5 was double now long
+  variable n_5_5 was double now long
+  variable n_T_5 was double now long
+  variable n_1_6 was double now long
+  variable n_2_6 was double now long
+  variable n_3_6 was double now long
+  variable n_4_6 was double now long
+  variable n_5_6 was double now long
+  variable n_T_6 was double now long
+  (3,553 bytes saved)
+
+. cap drop __*
+
+. save "${final}ap_test_data_2002_2020.dta", replace
+file /Volumes/shared//data//goofin//ap_data/final/ap_test_data_2002_2020.dta saved
+
+. export excel using "${final}ap_test_data_2002_2020.xlsx", firstrow(varlabels) replace
+file /Volumes/shared//data//goofin//ap_data/final/ap_test_data_2002_2020.xlsx saved
+
+. 
+end of do-file
+
+. help twoway
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. local graph 
+
+. cap drop zero
+
+. cap drop l?
+
+. gen zero = 0
+
+. gen l1 = (n_T_0)
+
+. gen l2 = (n_T_0 + n_T_1)
+
+. gen l3 = (n_T_0 + n_T_1+n_T_2)
+
+. gen l4 = (n_T_0 + n_T_1+n_T_2+n_T_3)
+
+. gen l5 = (n_T_0 + n_T_1+n_T_2+n_T_3+n_T_4)
+
+. gen l6 = (n_T_0 + n_T_1+n_T_2+n_T_3+n_T_4+n_T_5)
+
+. 
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (l6[_N]-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 l6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of all 
+> AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> ylab(0(1000000)6000000, format(%10.0fc))
+
+. xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))   ///
+> ytitle("Total number of AP test-takers")            ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+command xlab is unrecognized
+r(199);
+
+end of do-file
+
+r(199);
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (l6[_N]-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 l6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of all 
+> AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> ylab(0(1000000)6000000, format(%10.0fc)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))   ///
+> ytitle("Total number of AP test-takers")            ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+. graphsout "${results}fig_3", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_3.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_3.svg written in SVG format)
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (l6[_N]-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 l6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of all 
+> AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> ylab(0(1000000)6000000, format(%9.0fc)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))   ///
+> ytitle("Total number of AP test-takers")            ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+. graphsout "${results}fig_3", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_3.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_3.svg written in SVG format)
+
+. 
+end of do-file
+
+. do "/var/folders/df/9hwnnbb53ng0xrvw9fxmxf140000gn/T//SD01633.000000"
+
+. sort year
+
+. // collect the labels for the second y-axis
+. local mid = l1[_N]/2
+
+. local yaxis `"`mid' "Am. Ind.""'
+
+. 
+. local mid = (l2[_N]-l1[_N])/2 + l1[_N]
+
+. local yaxis `"`yaxis' `mid' "Asian""'
+
+. 
+. local mid = (l3[_N]-l2[_N])/2 + l2[_N]
+
+. local yaxis `"`yaxis' `mid' "Hispanic""'
+
+. 
+. local mid = (l4[_N]-l3[_N])/2 + l3[_N]
+
+. local yaxis `"`yaxis' `mid' "Black""'
+
+. 
+. local mid = (l5[_N]-l4[_N])/2 + l4[_N]
+
+. local yaxis `"`yaxis' `mid' "White""'
+
+. 
+. local mid = (l6[_N]-l5[_N])/2 + l5[_N]
+
+. local yaxis `"`yaxis' `mid' "Other""'
+
+. 
+. local lcolors="lwidth(none)"
+
+. colorpalette viridis, nograph
+
+. set scheme plotplainblind_mwg
+
+. twoway rarea zero l1 year, color("`r(p1)'") `lcolors' yaxis(1) ||  ///
+> rarea l1 l2 year, yaxis(2)  `lcolors' color("`r(p3)'")  ||  ///
+> rarea l2 l3 year, `lcolors' color("`r(p6)'")  ||            ///
+> rarea l3 l4 year, `lcolors' color("`r(p9)'")    ||            ///
+> rarea l4 l5 year, `lcolors' `lcolors' color("`r(p12)'")    ||            ///
+> rarea l5 l6 year, `lcolors' color("`r(p15)'")               ///ytitle("Percentage of all 
+> AP test-takers")              ///
+> ylab(`yaxis', axis(2)) ///
+> ylab(0(1000000)5000000, format(%9.0fc)) ///
+> xlab(2002(2)2020) ///
+> yscale(range(0 100) axis(1))      ///
+> yscale(range(0 100) axis(2))      ///
+> ytitle("", axis(2))   ///
+> ytitle("Total number of AP test-takers")            ///
+> plotregion(margin(zero))          ///
+> aspect(1)                         ///
+> legend(off) ///
+> xline(2019, lcolor(white))
+
+. 
+. graphsout "${results}fig_3", type(pdf svg) replace
+(file /Volumes/shared//data//goofin//ap_data/results/fig_3.pdf written in PDF format)
+(file /Volumes/shared//data//goofin//ap_data/results/fig_3.svg written in SVG format)
+
+. 
+end of do-file
+
